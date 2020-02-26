@@ -1,6 +1,6 @@
 #By Nick van der Linden
 
-name = 'Nick'
+name = 'Steven'
 
 def main():
     print(name)
