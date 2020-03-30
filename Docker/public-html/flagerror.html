@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- Show the program you will be using HTML -->
+<!-- In the header you put the title and icon of the page and the stylesheet you will be using! -->
+<head>
+    <title>HvA CTF</title>
+    <link rel="stylesheet" type="text/css" href="flagerror.css" />
+    <link rel="shortcut icon" href="peepoFlag.ico" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <meta charset="utf-8">
+    <meta http-equiv = "refresh" content = "2; url = index.html" />
+</head>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap');
+</style>
+
+<!-- In the body is the actualy website, here you make sections and form and scripts -->
+<body>
+
+    <form class="login-form" action="../wsgi/login.py" method="POST">
+        <img src="error.png" alt="ERROR">
+
+        <div class="spancontainer">
+            <p>You inserted the wrong flag</p>
+        </div>
+
+    </form>
+
+</body>

@@ -1,0 +1,225 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    /* background-image: linear-gradient(120deg, rgb(0, 0, 0), rgb(130, 23, 179)); */
+    background: radial-gradient(rgb(130, 23, 179), rgb(0, 0, 0));
+}
+
+.login-form {
+    width: 500px;
+    background: white;
+    height: 280px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    border-width: 1px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-form h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    /* text-transform: uppercase; */
+    font-weight: bold;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    color: #ce0b2c;
+    /* color: rgb(69, 69, 69); */
+    /* font-size: 15px; */
+    /* font-weight: bold; */
+}
+
+.login-form img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 21%;
+    margin-bottom: 50px;
+}
+
+.textbox {
+    border-bottom: 2px solid #7f8fa6;
+    position: relative;
+    margin: 30px 0;
+}
+
+.textbox input {
+    font-size: 15px;
+    color: black;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding-left: 0 5px;
+    height: 30px;
+}
+
+.textbox span::before {
+    content: attr(data-placeholder);
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: rgb(194, 194, 194);
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+}
+
+.textbox span::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(120deg, rgb(130, 23, 179), #480268);
+    transition: .5s;
+}
+
+.focus+span::before {
+    top: -5px;
+}
+
+.focus+span::after {
+    width: 100%;
+}
+
+.login-button {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: rgb(156, 60, 234);
+    border-radius: 5px;
+    text-transform: uppercase;
+    /* font-style: ; */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s;
+    margin-top: -10px;
+    margin-bottom: 40px;
+}
+
+.login-button:hover {
+    background-color: rgb(104, 18, 173);
+}
+
+.bottom-text {
+    display: block;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.bottom-text #helpbutton {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: rgb(102, 0, 170);
+}
+
+.tos-text {
+    text-align: center;
+}
+
+.tos-text a {
+    color: rgb(102, 0, 170);
+}
+
+
+/* #popup-box {
+    width: 380px;
+    overflow: hidden;
+    box-shadow: 0 0 20px #EA3C53;
+    background: white;
+    height: 155px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    border-width: 1px;
+    position: absolute;
+    left: 50%;
+    top: 12%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: block;
+    transition: .5s;
+}
+
+#popup-box {
+    width: 380px;
+    overflow: hidden;
+    box-shadow: 0 0 20px #EA3C53;
+    background: white;
+    height: 155px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    border-width: 1px;
+    position: absolute;
+    left: 50%;
+    top: 12%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: block;
+    transition: .5s;
+}
+
+#popup-box .popup-text {
+    text-align: center;
+}
+
+#popup-box .popup-text span {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 0px;
+    color: black;
+}
+
+#popup-box .popup-text-code span {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: black;
+}
+
+#popup-box .popup-close input {
+    display: block;
+    width: 100%;
+    height: 30px;
+    border: none;
+    outline: none;
+    background: #EA3C53;
+    border-radius: 4px;
+    text-align: center;
+    color: white;
+}
+
+#popup-box .popup-close input:hover {
+    display: block;
+    width: 100%;
+    height: 30px;
+    border: none;
+    background: #960018;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    color: white;
+} */

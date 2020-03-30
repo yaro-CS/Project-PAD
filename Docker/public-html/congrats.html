@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- Show the program you will be using HTML -->
+<!-- In the header you put the title and icon of the page and the stylesheet you will be using! -->
+<head>
+    <title>HvA CTF</title>
+    <link rel="stylesheet" type="text/css" href="congrats.css" />
+    <link rel="shortcut icon" href="peepoFlag.ico" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <meta charset="utf-8">
+</head>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap');
+</style>
+
+<!-- In the body is the actualy website, here you make sections and form and scripts -->
+<body>
+
+    <form class="login-form" action="/html/index.html" method="POST">
+        <img src="correct.png" alt="Congrats!">
+
+        <div class="spancontainer">
+            <p>Congratulations on finding</p>
+            <p>Flag: <b>{number}</b></p>
+            <p>Difficulty: <b>{Diff}</b></p>
+        </div>
+
+        <input type="submit" class="login-button" value="GO BACK HOME">
+
+        <!-- <div class="tos-text"> -->
+        <!--     By continuing you accept the <a href="../html/terms.html">Terms of service</a> -->
+        <!-- </div> -->
+
+    </form>
+
+    <!-- Javascript -->
+    <script type="text/javascript">
+        // This Part is for the animated input fields
+        $(".textbox input").on("focus",function(){
+            $(this).addClass("focus");
+        });
+
+        $(".textbox input").on("blur",function(){
+            if($(this).val() == "")
+            $(this).removeClass("focus");
+        });
+
+    </script>
+
+</body>
