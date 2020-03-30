@@ -9,8 +9,8 @@ RUN mkdir /var/www/wsgi
 
 COPY ./wsgi/ /var/www/wsgi
 
-RUN chmod -R --preserve-root 755 /var
-RUN chmod -R --preserve-root 711 /var/wsgi
+RUN chmod -R --preserve-root 755 /var/www
+RUN chmod -R --preserve-root 711 /var/www/wsgi
 RUN chmod -R --preserve-root 755 /etc/apache2/sites-available/website.conf
 
 RUN a2dissite 000-default
