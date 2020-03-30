@@ -48,11 +48,10 @@ def application(environ, start_response):
     # checkFlag = '$FLAG#8235327563857329$' # Check a flag to replicate a form filled <----- ## DEBUG ##
     # checkFlag = '$FLAG#L3V3L7W0$' # Check a flag to replicate a form filled <------------- ## DEBUG ##
     # checkFlag = '\' OR 1=1 --' # Injection <---------------------------------------------- ## DEBUG ##
-
+    # checkFlag = '\" OR 1=1 --' # Injection <---------------------------------------------- ## DEBUG ##
     
     # Hier check je voor SQLinjection
     SQLcharsGood = ['$', '#']
-    SQLcharsBad = ['\'', '-', ')', '(', ';', ':']
     SQLinject = 0
 
     for x in SQLcharsGood:
@@ -60,10 +59,8 @@ def application(environ, start_response):
         if contains == True:
             SQLinject = 0
 
-    for x in SQLcharsBad:
-        contains = x in checkFlag
-        if contains == True:
-            SQLinject = 1 
+    if '\' OR 1=1 --' in checkFlag:
+        SQLinject = 1 
 
 
     #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####
@@ -193,7 +190,7 @@ def application(environ, start_response):
 
 #===================================================  DEBUG CODE ===================================================#
 
-# if __name__ == '__main__': # zoeken of het programma word gerunned direct door vCode of dat het voor iets anders
-#                            # bestemd was zoals bijvoorbeeld een webpagina
-#     page = application({}, print) # pak de code van de application functie en gebruik die
-#     print(page[0].decode()) # Decode bytes naar strings
+if __name__ == '__main__': # zoeken of het programma word gerunned direct door vCode of dat het voor iets anders
+                           # bestemd was zoals bijvoorbeeld een webpagina
+    page = application({}, print) # pak de code van de application functie en gebruik die
+    print(page[0].decode()) # Decode bytes naar strings
