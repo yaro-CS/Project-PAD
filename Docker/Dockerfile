@@ -9,7 +9,9 @@ RUN mkdir /var/www/wsgi
 
 COPY ./wsgi/ /var/www/wsgi
 
-RUN chmod 644 /etc/apache2/sites-available/website.conf
+RUN chmod 755 /var/
+RUN chmod 711 /var/wsgi/
+RUN chmod 755 /etc/apache2/sites-available/website.conf
 RUN a2dissite 000-default
 RUN a2ensite website
 RUN service apache2 stop
