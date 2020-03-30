@@ -15,3 +15,4 @@ RUN a2dissite 000-default
 RUN a2ensite website
 RUN service apache2 stop
 RUN service apache2 start
+RUN httpd restart
