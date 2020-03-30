@@ -1,10 +1,6 @@
-# Import the neccesary libaries
-import subprocess # To run raspbian commands from this script
-# import mysql.connector # To connect to mariaDB from this script
-import urllib.parse as urlparse # Needed to be a WSGI page
+import subprocess
+import urllib.parse as urlparse
 
-
-# De definition met application (including environ en start_response)
 def application(environ, start_response):
     status = '200 OK'
     response_header = [('Content-type', 'text/html')]
@@ -13,25 +9,21 @@ def application(environ, start_response):
 
     #=====================================  STEP 1: PARSE AND REQUEST INFORMATION FROM HTML  =====================================#
 
-
-    # Request en parse de input gegeven in de webportal
     environmentVars = ["REQUEST_METHOD", "REQUEST_URI", "QUERY_STRING", "SCRIPT_NAME", "HTTP_REFERER", "REMOTE_ADDR"]
 
-    # Load de environment variables into variables
-    # easier acces to a single value
     requestMethod = environ.get('REQUEST_METHOD', '')
     requestUri = environ.get('REQUEST_URI', '')
     queryString = environ.get('QUERY_STRING', '')
     scriptName = environ.get('SCRIPT_NAME', '')
+    httpReferer = environ.get('HTTP_REFERER', '')
+    remoteAdres = environ.get('REMOTE_ADDR', '')
+
     levelFlagsOne = ('$FLAG#M4N1NTH3M1DDLE$', 'Level 1', 'Easy')
     levelFlagsTwo = ('$FLAG#L3V3L7W0$', 'Level 2', 'Intermediate')
     levelFlagsThree = ('$FLAG#3D177H3M3SS4G3$', 'Level 3', 'Hard')
     tips = ['tip 1', 'tip 2', 'tip 3']
     counter = 1
-    httpReferer = environ.get('HTTP_REFERER', '')
-    remoteAdres = environ.get('REMOTE_ADDR', '')
-
-    # convert the requested vars from environmentVars into normal data
+    
     method = environ.get(environmentVars[0], '')
     if method == 'GET':
         parameters = urlparse.parse_qs(environ[ environmentVars[2] ])
@@ -39,18 +31,10 @@ def application(environ, start_response):
         userInput = environ['wsgi.input'].read().decode()
         parameters = urlparse.parse_qs(userInput)
 
-
     #=====================================  STEP 2: CHECK FLAG AND CHECK FOR SQL INJECTION  =====================================#
 
-
-    # Fetch Input from the webportal.html file
     checkFlag = parameters.get('checkFlag', [''])[0]
-    # checkFlag = '$FLAG#8235327563857329$' # Check a flag to replicate a form filled <----- ## DEBUG ##
-    # checkFlag = '$FLAG#L3V3L7W0$' # Check a flag to replicate a form filled <------------- ## DEBUG ##
-    # checkFlag = '\' OR 1=1 --' # Injection <---------------------------------------------- ## DEBUG ##
-    # checkFlag = '\" OR 1=1 --' # Injection <---------------------------------------------- ## DEBUG ##
-    
-    # Hier check je voor SQLinjection
+
     SQLcharsGood = ['$', '#']
     SQLinject = 0
 
@@ -61,11 +45,6 @@ def application(environ, start_response):
 
     if '\' OR 1=1 --' in checkFlag:
         SQLinject = 1 
-
-
-    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####
-    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####    #####
-
 
     if SQLinject == 0:
         confirmFlag = 0
@@ -86,14 +65,11 @@ def application(environ, start_response):
             Level = levelFlagsThree[1]
             Difficulty = levelFlagsThree[2]
             confirmFlag = 1
-        
-    # if SQLinject == 1:
-    #     tips = ['tip 1', 'tip 2', 'tip 3']
 
     #=============================================  HTML CODE STARTING HERE =============================================#
 
     if SQLinject == 0 and confirmFlag == 0:
-        html = '<meta http-equiv = "refresh" content = "0; url = ../html/flagerror.html" />'
+        html = '<meta http-equiv = "refresh" content = "0; url = flagerror.html" />'
         
     if SQLinject == 0 and confirmFlag == 1:
         html = '<\n!DOCTYPE html>'
@@ -114,7 +90,7 @@ def application(environ, start_response):
         html += '\n<body>'
         html += '\n'
         html += '\n    <form class="login-form" action="../html/index.html" method="POST">'
-        html += '\n        <img src="../html/correct.png" alt="ERROR">'
+        html += '\n        <img src="../html/correct.png" alt="Congrats">'
         html += '\n'
         html += '\n        <div class="spancontainer">'
         html += '\n            <p>Congratulations on finding</p>'
@@ -157,7 +133,7 @@ def application(environ, start_response):
         html += '\n<body>'
         html += '\n'
         html += '\n    <form class="login-form" action="../html/index.html" method="GET">'
-        html += '\n        <img src="../html/correct.png" alt="ERROR">'
+        html += '\n        <img src="../html/correct.png" alt="Congrats!">'
         html += '\n'
         html += '\n        <div class="spancontainer">'
         
@@ -185,12 +161,4 @@ def application(environ, start_response):
         html += '\n    </script>'
         html += '\n</body>'
         
-    # Return the code into bytes for browser
-    return [bytes(html, 'utf-8')] # WSGI standaart om utf-8 te gebruiken
-
-#===================================================  DEBUG CODE ===================================================#
-
-if __name__ == '__main__': # zoeken of het programma word gerunned direct door vCode of dat het voor iets anders
-                           # bestemd was zoals bijvoorbeeld een webpagina
-    page = application({}, print) # pak de code van de application functie en gebruik die
-    print(page[0].decode()) # Decode bytes naar strings
+    return [bytes(html, 'utf-8')]
